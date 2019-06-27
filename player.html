@@ -29,9 +29,8 @@
 
         // BEGIN MPX specific code
         var usethePlatformLicenseFormat = true;
-        var serverCertificatePath = 'https://s3-eu-west-1.amazonaws.com/tpuk.eu-test/vp_fp_test_certifcate/Viaplay_cer.der'; // ADAPT: This is the path to the fps certificate on your server.
         var fairplayLicenseService  = 'https://fairplay.entitlement.theplatform.eu/fpls/web/FairPlay';
-        var releasePid, token, accountId, url;
+        var releasePid, token, accountId, url, serverCertificatePath;
 
         function signIn(event) {
             event.preventDefault();
@@ -64,6 +63,7 @@
             token = document.getElementById("mpx_token").value;
             account = encodeURI(document.getElementById("mpx_account").value);
             url = document.getElementById("mpx_url").value;
+            serverCertificatePath = (document.getElementById("fp_certificate".value) == null)? 'https://s3-eu-west-1.amazonaws.com/tpuk.eu-test/vp_fp_test_certifcate/Viaplay_cer.der' : document.getElementById("fp_certificate").value ; // ADAPT: This is the path to the fps certificate on your server.
             loadCertificate();
         }
         // END MPX specific code
@@ -353,7 +353,9 @@
     Token: <input type="text" name="token" id="mpx_token" value="" /><br/>
     ReleasePid: <input type="text" name="release_pid" id="mpx_release_pid" value="fillout_mpx_release_pid" /><br/>
     Account: <input type="text" name="account" id="mpx_account" value="http://access.auth.theplatform.com/data/Account/2400876579" title="Viaplay Prod - Staging" /><br/>
-    Url: <input type="text" name="url" id="mpx_url" value="fillout_mpx_url, eg http://origintest.sandbox.theplatform.com/demo/content/DRM_Demo_Account/1006/735/megamind_960x408.m3u8" title="Mega Fun" /><br/>
+    Url: <input type="text" name="url" id="mpx_url" value="fillout_mpx_url, eg http://origintest.sandbox.theplatform.com/demo/content/DRM_Demo_Account/1006/735/megamind_960x408.m3u8" title="Mega Fun" /> <br/>
+    FairPlay Certificate: <input type="text" name="certificate" id="fp_certificate" value="https://s3-eu-west-1.amazonaws.com/tpuk.eu-test/vp_fp_test_certifcate/Viaplay_cer.der" />
+    <br/>
     <input type="submit" value="Load" onClick="load()"/>
 </fieldset>
 </p>
